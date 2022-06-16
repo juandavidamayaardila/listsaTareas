@@ -1,11 +1,13 @@
 package com.co.sofka.tareas.service;
 
+
 import com.co.sofka.tareas.model.Task;
 import com.co.sofka.tareas.repository.ITaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+
 
 @Service
 public class TaskService {
@@ -13,8 +15,12 @@ public class TaskService {
     final
     ITaskRepository taskRepository;
 
-    public TaskService(ITaskRepository taskRepository) {
+    final
+    ModelMapper modelMapper;
+
+    public TaskService(ITaskRepository taskRepository, ModelMapper modelMapper) {
         this.taskRepository = taskRepository;
+        this.modelMapper = modelMapper;
     }
 
     /**
@@ -23,7 +29,9 @@ public class TaskService {
      * @return lista de tareas.
      */
     public ArrayList<Task> getTaskAll(){
+
         return (ArrayList<Task>) taskRepository.findAll();
+
     }
 
     /**
@@ -33,7 +41,18 @@ public class TaskService {
      * @return tarea almacenada con su id incluido
      */
     public Task saveTask(Task task){
+
         return taskRepository.save(task);
+
+    }
+
+    public Boolean deleteTask(Long idTask){
+        try {
+            taskRepository.deleteById(idTask);
+            return true;
+        }catch (Exception err){
+            return false;
+        }
     }
 
 }

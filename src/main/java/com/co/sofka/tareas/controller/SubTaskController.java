@@ -1,12 +1,16 @@
 package com.co.sofka.tareas.controller;
 
+
 import com.co.sofka.tareas.model.Subtask;
 import com.co.sofka.tareas.service.SubTaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/subtask")
 public class SubTaskController {
@@ -14,19 +18,42 @@ public class SubTaskController {
     final
     SubTaskService subTaskService;
 
-    public SubTaskController(SubTaskService subTaskService) {
+    final
+    ModelMapper modelMapper;
+
+    public SubTaskController(SubTaskService subTaskService, ModelMapper modelMapper) {
         this.subTaskService = subTaskService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
     public ArrayList<Subtask> getAllSubtask(){
-        return this.subTaskService.getSubtasAll();
+        return (ArrayList<Subtask>) subTaskService.getSubtasAll();
+
+    }
+
+    @GetMapping("/buscarsubtask")
+    public ArrayList<Subtask> getSubtaskByIDTask(@RequestParam("idtask") Long idtask){
+        return (ArrayList<Subtask>) subTaskService.getSubtaskByIdTask(idtask);
+
     }
 
     @PostMapping
     public Subtask saveSubtask(@RequestBody Subtask subtask){
-        return this.subTaskService.saveSubTask(subtask);
+
+        return subTaskService.saveSubTask(subtask);
+
     }
+
+    @DeleteMapping("/deletesubtask")
+    public String deleteSubTaskId(@RequestParam("idsubtask") Long idsubtask){
+        Boolean answer = subTaskService.deleteSubTaskId(idsubtask);
+        if(answer){
+            return "se elimino correctamente";
+        }
+        return "No se pudo eliminar por favor intente de nuevo";
+    }
+
 
 
 }
