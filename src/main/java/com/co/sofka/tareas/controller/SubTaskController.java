@@ -9,7 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * Controlado de subtareas, contiene los endPoints
+ * que seran consumidos por el cliente
+ *
+ *  @version  01.02.003 16/06/2022
+ *  @author JD-Amaya
+ *  @since 01.
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/subtask")
@@ -21,23 +29,48 @@ public class SubTaskController {
     final
     ModelMapper modelMapper;
 
+    /**
+     * Constructor que permite iyectar la dependencia del servicio
+     * y el modelppaer.
+     *
+     * @param subTaskService servicio con la implementacion de metodos
+     * @param modelMapper libreria para mapper y usar los dtos
+     */
     public SubTaskController(SubTaskService subTaskService, ModelMapper modelMapper) {
         this.subTaskService = subTaskService;
         this.modelMapper = modelMapper;
     }
 
+    /**
+     * Obtiene todas las subtareas almaceandas.
+     *
+     * @return lista con las subtareas almacenadas.
+     */
     @GetMapping
     public ArrayList<Subtask> getAllSubtask(){
-        return (ArrayList<Subtask>) subTaskService.getSubtasAll();
+        return subTaskService.getSubtasAll();
 
     }
 
+    /**
+     * Permite buscar una subtarea por medio del id de la tarea,
+     * por medio de su llave foranea.
+     *
+     * @param idtask id de la tarea
+     * @return lista de las subtareas pertenecientes a ese id
+     */
     @GetMapping("/buscarsubtask")
     public ArrayList<Subtask> getSubtaskByIDTask(@RequestParam("idtask") Long idtask){
-        return (ArrayList<Subtask>) subTaskService.getSubtaskByIdTask(idtask);
+        return subTaskService.getSubtaskByIdTask(idtask);
 
     }
 
+    /**
+     * Permite guardar una subtarea
+     *
+     * @param subtask objeto a ser guardado.
+     * @return objeto almacenado con su id.
+     */
     @PostMapping
     public Subtask saveSubtask(@RequestBody Subtask subtask){
 
@@ -45,6 +78,12 @@ public class SubTaskController {
 
     }
 
+    /**
+     * Permite eliminar una subtarea por medio de us id.
+     *
+     * @param idsubtask id de la subtarea a ser eliminado.
+     * @return texto con la operacion realizada.
+     */
     @DeleteMapping("/deletesubtask")
     public String deleteSubTaskId(@RequestParam("idsubtask") Long idsubtask){
         Boolean answer = subTaskService.deleteSubTaskId(idsubtask);

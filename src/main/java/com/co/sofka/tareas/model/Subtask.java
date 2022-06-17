@@ -3,6 +3,15 @@ package com.co.sofka.tareas.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Clase entity representa la tabla
+ * donde se almacenara las subtareas.
+ *
+ *  @version  01.02.003 16/06/2022
+ *  @author JD-Amaya
+ *  @since 01.
+ *
+ */
 @Entity
 public class Subtask {
 
@@ -14,13 +23,18 @@ public class Subtask {
     @Column(length = 50, nullable = false)
     private String description;
 
-    @ManyToOne
+    /**
+     * Relacion de muchos a uno
+     * donde una tarea tiene muchas subtareas.
+     */
+    @ManyToOne()
     @JoinColumn(name = "id_Task")
     private Task task;
 
     public Subtask() {
 
     }
+
 
     public Subtask(Long id, String description, Task task) {
         this.id = id;

@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Service
@@ -46,9 +47,25 @@ public class TaskService {
 
     }
 
+    /**
+     * Obtiene un objeto entity a partir de su id
+     *
+     * @param idTask id de la tarea a buscar
+     * @return objeto completo encontrado.
+     */
+    public Task getTaskId(Long idTask){
+        return taskRepository.findById(idTask).orElseThrow();
+    }
+
+    /**
+     * Permite eliminar un elemento aparti de su id.
+     *
+     * @param idTask id para buscar el elemento
+     * @return true o false.
+     */
     public Boolean deleteTask(Long idTask){
         try {
-            taskRepository.deleteById(idTask);
+            taskRepository.delete(getTaskId(idTask));
             return true;
         }catch (Exception err){
             return false;
