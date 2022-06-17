@@ -93,6 +93,22 @@ public class SubTaskController {
         return "No se pudo eliminar por favor intente de nuevo";
     }
 
+    /**
+     * Permite buscar una subtarea por medio del id y
+     * settear el parametro complet
+     *
+     * @param idsubtask id de la tarea
+     * @param complet parametro a ser actualizado.
+     * @return elemento actualizado
+     */
+    @GetMapping("/subtaskcomplet")
+    public Subtask updateCompletSubtask(@RequestParam("idsubtask") Long idsubtask,
+                                                   @RequestParam("complet") Boolean complet)
+    {
+        Subtask subtaskTmp = subTaskService.getSubTaskID(idsubtask);
+        subtaskTmp.setComplet(complet);
+        return subTaskService.saveSubTask(subtaskTmp);
 
+    }
 
 }

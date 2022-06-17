@@ -23,6 +23,8 @@ public class Subtask {
     @Column(length = 50, nullable = false)
     private String description;
 
+    private Boolean complet;
+
     /**
      * Relacion de muchos a uno
      * donde una tarea tiene muchas subtareas.
@@ -36,15 +38,18 @@ public class Subtask {
     }
 
 
-    public Subtask(Long id, String description, Task task) {
+    public Subtask(Long id, String description, Task task, Boolean complet) {
         this.id = id;
         this.description = description;
         this.task = task;
+        this.complet = complet;
     }
 
-    public Subtask(String description, Task task) {
+    public Subtask(String description, Task task, Boolean complet) {
         this.description = description;
         this.task = task;
+        this.complet = complet;
+
     }
 
     public Long getId() {
@@ -65,6 +70,14 @@ public class Subtask {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public Boolean getComplet() {
+        return complet;
+    }
+
+    public void setComplet(Boolean complet) {
+        this.complet = complet;
     }
 
     @Override
