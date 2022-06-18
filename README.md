@@ -14,7 +14,10 @@ axios para realizar las peticiones y boostrap para mejorar el diseño.
 ## Installation
 Servidor de base de datos Mysql, la conexion se encuentra en el archivo properties.
 ```bash
-  Nombre de la Base de datos: task
+  spring.jpa.hibernate.ddl-auto=update
+  spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/task
+  spring.datasource.username=juan
+  spring.datasource.password=j0slwuYE
 ```
 ## Feedback
 Usar apis para la creacion de proyectos es bastante util ya que un mismo backend
