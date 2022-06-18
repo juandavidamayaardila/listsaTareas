@@ -48,6 +48,13 @@ public class SubTaskService {
         return (ArrayList<Subtask>) subTaskRepository.findAll();
     }
 
+    /**
+     * Meotod que permite obtener todas las subtareas
+     * pertenecientes a una tarea
+     *
+     * @param idTask parametro de busqueda
+     * @return lista con todas las subtareas pertenecientes.
+     */
     public ArrayList<Subtask> getSubtaskByIdTask(Long idTask) {
 
         return (ArrayList<Subtask>) subTaskRepository.findById_task(idTask);
@@ -90,7 +97,4 @@ public class SubTaskService {
             return false;
         }
     }
-
-
-
 }

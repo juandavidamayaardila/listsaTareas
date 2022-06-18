@@ -108,7 +108,5 @@ public class SubTaskController {
         Subtask subtaskTmp = subTaskService.getSubTaskID(idsubtask);
         subtaskTmp.setComplet(complet);
         return subTaskService.saveSubTask(subtaskTmp);
-
     }
-
 }

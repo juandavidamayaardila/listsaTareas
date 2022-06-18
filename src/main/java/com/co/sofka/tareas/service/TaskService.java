@@ -9,7 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
+/**
+ * Servicio implemente la interfaz del repositorio
+ * para acceder a los metodos jpa y el los metodos
+ * especificos que se hayan creado.
+ *
+ * @author JD-Amaya
+ * @version 01.02.003 17/06/2022
+ * @since 01.
+ */
 @Service
 public class TaskService {
 
@@ -30,9 +38,7 @@ public class TaskService {
      * @return lista de tareas.
      */
     public ArrayList<Task> getTaskAll(){
-
         return (ArrayList<Task>) taskRepository.findAll();
-
     }
 
     /**
@@ -42,9 +48,7 @@ public class TaskService {
      * @return tarea almacenada con su id incluido
      */
     public Task saveTask(Task task){
-
         return taskRepository.save(task);
-
     }
 
     /**
@@ -71,5 +75,4 @@ public class TaskService {
             return false;
         }
     }
-
 }
